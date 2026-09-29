@@ -33,7 +33,10 @@ Vercel → Project → Settings → Environment Variables.
 |---|---|
 | `APP_PASSWORD` | a password you choose; staff type it once per device |
 | `GEMINI_API_KEY` | your Gemini key |
-| `GEMINI_MODEL` | optional, default `gemini-3.5-flash-lite` |
+| `GEMINI_MODEL` | optional, default `gemini-3.8-flash` |
+| `GEMINI_FALLBACK_MODEL` | optional, default `gemini-3.7-flash` — tried if the main model fails |
+| `MISTRAL_API_KEY` | optional third-tier backup — a free key from console.mistral.ai, tried only if both Gemini models fail |
+| `MISTRAL_MODEL` | optional, default `mistral-small-latest` |
 | `GOOGLE_CLIENT_EMAIL` | `client_email` from the JSON key |
 | `GOOGLE_PRIVATE_KEY` | `private_key` from the JSON key (line breaks or literal `\n` both work) |
 | `GOOGLE_SHEET_ID` | ID from the sheet URL (between `/d/` and `/edit`) |
@@ -63,6 +66,7 @@ Row 1 totals and the Active column are formulas and update themselves.
 - **"Tab … was not found"** — tab names must match exactly (case and spaces).
 - **"Day N was not found in the header row"** — row 2 of that tab has no column with that number.
 - **Gemini error 404** — the model name is wrong or retired; set `GEMINI_MODEL`.
+- **"Gemini is busy right now... tried Mistral as a backup, which also failed"** — both Gemini models and Mistral were overloaded at once (rare). Wait a minute and retry.
 - **Photo too large / timeout** — photos are shrunk in the browser before upload; retry with a clearer, smaller photo.
 
 ## Security notes
